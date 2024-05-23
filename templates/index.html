@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Binary String Processor</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Binary String Processor</h1>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="files[]" multiple>
+            <button type="submit">Upload Files</button>
+        </form>
+        <form action="/process" method="post">
+            <button type="submit">Process Files</button>
+        </form>
+        <form action="/ask" method="post">
+            <input type="text" name="question" placeholder="Enter your question">
+            <button type="submit">Ask Question</button>
+        </form>
+        <form action="/clear" method="post">
+            <button type="submit">Clear Cache</button>
+        </form>
+        <h2>Processed Files</h2>
+        <ul>
+            {% for file in files %}
+                <li>
+                    {{ file }} - <a href="{{ url_for('plot_graph', filename=file) }}">View Histogram</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
